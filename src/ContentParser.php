@@ -48,9 +48,8 @@ class ContentParser
     /**
      * Parses the content and returns a Content object
      */
-    public function parse($content): Content
+    public function parse(Content $article): Content
     {
-        $article = new Content($content);
         $parts = preg_split('/[\n]*[-]{3}[\n]/', $article->raw, 3);
 
         if (count($parts) > 2) {

@@ -12,7 +12,7 @@ $content .= "## Testing";
 
 test('it parses and returns a Content object', function () use($content) {
     $parser = new ContentParser();
-    $article = $parser->parse($content);
+    $article = $parser->parse(new Content($content));
 
     expect($article)->toBeObject();
     expect($article->raw)->toBeString();
@@ -20,7 +20,7 @@ test('it parses and returns a Content object', function () use($content) {
 
 test('it loads content and parses front matter', function () use($content) {
     $parser = new ContentParser();
-    $article = $parser->parse($content);
+    $article = $parser->parse(new Content($content));
 
     expect($article->title)->toEqual("Content Title");
     expect($article->custom)->toEqual("custom");
@@ -30,7 +30,7 @@ test('it loads content and parses front matter', function () use($content) {
 
 test('it loads content and parses markdown', function () use($content) {
     $parser = new ContentParser();
-    $article = $parser->parse($content);
+    $article = $parser->parse(new Content($content));
 
     expect($article->body_html)->toEqual("<h2>Testing</h2>");
 });

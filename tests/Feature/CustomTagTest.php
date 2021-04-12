@@ -15,21 +15,21 @@ $github_content = $content . "\n{% github https://github.com/erikaheidi/parsed/b
 
 test('it parses twitter liquid tag', function () use($twitter_content) {
     $parser = new ContentParser();
-    $article = $parser->parse($twitter_content);
+    $article = $parser->parse(new Content($twitter_content));
 
     expect($article->body_html)->toContain("https://twitter.com");
 });
 
 test('it parses youtube liquid tag', function () use($youtube_content) {
     $parser = new ContentParser();
-    $article = $parser->parse($youtube_content);
+    $article = $parser->parse(new Content($youtube_content));
 
     expect($article->body_html)->toContain("https://www.youtube.com/embed/");
 });
 
 test('it parses github liquid tag', function () use($github_content) {
     $parser = new ContentParser();
-    $article = $parser->parse($github_content);
+    $article = $parser->parse(new Content($github_content));
 
     expect($article->body_html)->toContain('"name": "erikaheidi/parsed"');
 });

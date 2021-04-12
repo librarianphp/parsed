@@ -38,23 +38,19 @@ class Content
     }
 
     /**
+     * Explodes front mater value into array (for tags and similar)
+     * @param string $key
      * @return array
      */
-    public function getTagsAsArray(): array
+    public function getAsArray(string $key): array
     {
-        $tags = [];
+        $collection = [];
 
-        if ($this->tag_list) {
-            $article_tags = explode(',', $this->tag_list);
-
-            foreach ($article_tags as $article_tag) {
-                $tag_name = trim(str_replace('#', '', $article_tag));
-
-                $tags[] = $tag_name;
-            }
+        if ($this->frontMatterHas($key)) {
+            $collection = explode(',', $this->frontMatterGet($key));
         }
 
-        return $tags;
+        return $collection;
     }
 
     /**
@@ -78,5 +74,44 @@ class Content
         }
 
         return $default_value;
+    }
+
+    /**
+     * @param string $key
+     * @param string $value
+     */
+    public function frontMatterSet(string $key, string $value)
+    {
+        $this->front_matter[$key] = $value;
+    }
+
+    /**
+     * @param ContentParser $parser
+     */
+    public function parse(ContentParser $parser)
+    {
+        $parser->parse($this);
+    }
+
+    /**
+     * @return string
+     */
+    public function getFrontMatter(): string
+    {
+        $content = "---\n";
+        foreach ($this->front_matter as $key => $value) {
+            $content .= "$key: $value\n";
+        }
+        $content .= "---\n";
+
+        return $content;
+    }
+
+    public function updateRaw()
+    {
+        $raw = $this->getFrontMatter();
+        $raw .= $this->body_markdown;
+
+        $this->raw = $raw;
     }
 }

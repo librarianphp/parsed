@@ -19,7 +19,6 @@ test('it creates content from raw markdown', function () use($content) {
 test('it parses content with front matter', function () use($content) {
     $content = new Content($content);
     $content->parse(new ContentParser());
-    print_r($content);
     expect($content->title)->toEqual("Content Title");
     expect($content->body_html)->toEqual("<h2>Testing</h2>");
 });

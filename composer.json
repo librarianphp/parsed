@@ -13,8 +13,7 @@
     "ext-curl": "*",
     "ext-json": "*",
     "erusev/parsedown-extra": "^0.8.1",
-    "minicli/curly": "^0.1.2",
-    "minicli/minicache": "^0.2.0"
+    "minicli/curly": "^0.1.2"
   },
   "require-dev": {
     "pestphp/pest": "^1.0"

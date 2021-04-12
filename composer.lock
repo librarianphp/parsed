@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "223bd9ba7586390686c2a257ca49346a",
+    "content-hash": "971b42a3ac23aef8ec4bbcb1536b6ba3",
     "packages": [
         {
             "name": "erusev/parsedown",
@@ -146,46 +146,6 @@
                 "source": "https://github.com/minicli/curly/tree/master"
             },
             "time": "2020-02-24T10:33:43+00:00"
-        },
-        {
-            "name": "minicli/minicache",
-            "version": "0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/minicli/minicache.git",
-                "reference": "637c2ea48448b4ce68cf8815b7693b95e907d4de"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/minicli/minicache/zipball/637c2ea48448b4ce68cf8815b7693b95e907d4de",
-                "reference": "637c2ea48448b4ce68cf8815b7693b95e907d4de",
-                "shasum": ""
-            },
-            "require": {
-                "ext-json": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Minicli\\Minicache\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "A simple json file cache for minicli",
-            "homepage": "https://github.com/minicli/minicli",
-            "keywords": [
-                "cache",
-                "json",
-                "micro"
-            ],
-            "support": {
-                "issues": "https://github.com/minicli/minicache/issues",
-                "source": "https://github.com/minicli/minicache/tree/master"
-            },
-            "time": "2020-05-21T09:03:53+00:00"
         }
     ],
     "packages-dev": [

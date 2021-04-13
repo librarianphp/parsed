@@ -48,14 +48,16 @@ class ContentParser
     /**
      * Parses the content and returns a Content object
      */
-    public function parse(Content $article): Content
+    public function parse(Content $article, bool $parse_markdown = false): Content
     {
         $parts = preg_split('/[\n]*[-]{3}[\n]/', $article->raw, 3);
 
         if (count($parts) > 2) {
             $article->front_matter = $this->getFrontMatter($parts[1]);
             $article->body_markdown = $parts[2];
-            $article->body_html = $this->getHtmlBody($article->body_markdown);
+            if ($parse_markdown) {
+                $article->body_html = $this->getHtmlBody($article->body_markdown);
+            }
         } else {
             $article->front_matter = [];
             $article->body_markdown = $article->raw;

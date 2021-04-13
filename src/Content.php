@@ -15,7 +15,7 @@ class Content
     public $raw;
 
     /** @var array Front-matter key-pairs */
-    public $front_matter;
+    public $front_matter = [];
 
     /** @var string Body of content in markdown */
     public $body_markdown;
@@ -88,9 +88,9 @@ class Content
     /**
      * @param ContentParser $parser
      */
-    public function parse(ContentParser $parser)
+    public function parse(ContentParser $parser, bool $parse_markdown = false)
     {
-        $parser->parse($this);
+        $parser->parse($this, $parse_markdown);
     }
 
     /**

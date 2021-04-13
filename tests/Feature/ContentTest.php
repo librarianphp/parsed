@@ -22,7 +22,7 @@ test('it creates content from raw markdown', function () {
 
 test('it parses content with front matter', function () {
     $content = new Content($this->raw_content);
-    $content->parse(new ContentParser());
+    $content->parse(new ContentParser(), true);
     expect($content->title)->toEqual("Content Title");
     expect($content->body_html)->toEqual("<h2>Testing</h2>");
 });

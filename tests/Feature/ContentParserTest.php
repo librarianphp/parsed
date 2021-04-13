@@ -34,7 +34,7 @@ test('it loads content and parses front matter', function () {
 
 test('it loads content and parses markdown', function () {
     $parser = new ContentParser();
-    $article = $parser->parse(new Content($this->raw_content));
+    $article = $parser->parse(new Content($this->raw_content), true);
 
     expect($article->body_html)->toEqual("<h2>Testing</h2>");
 });

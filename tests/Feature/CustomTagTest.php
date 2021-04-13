@@ -17,21 +17,21 @@ beforeEach(function () {
 
 test('it parses twitter liquid tag', function () {
     $parser = new ContentParser();
-    $article = $parser->parse(new Content($this->twitter_content));
+    $article = $parser->parse(new Content($this->twitter_content), true);
 
     expect($article->body_html)->toContain("https://twitter.com");
 });
 
 test('it parses youtube liquid tag', function () {
     $parser = new ContentParser();
-    $article = $parser->parse(new Content($this->youtube_content));
+    $article = $parser->parse(new Content($this->youtube_content), true);
 
     expect($article->body_html)->toContain("https://www.youtube.com/embed/");
 });
 
 test('it parses github liquid tag', function () {
     $parser = new ContentParser();
-    $article = $parser->parse(new Content($this->github_content));
+    $article = $parser->parse(new Content($this->github_content), true);
 
     expect($article->body_html)->toContain('"name": "erikaheidi/parsed"');
 });

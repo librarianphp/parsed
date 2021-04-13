@@ -16,6 +16,7 @@
     "minicli/curly": "^0.1.2"
   },
   "require-dev": {
-    "pestphp/pest": "^1.0"
+    "pestphp/pest": "^1.0",
+    "friendsofphp/php-cs-fixer": "^2.18"
   }
 }

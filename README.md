@@ -1,14 +1,25 @@
 # Parsed
-A generic content parser based on the devto post format, with liquid tag support, using erusev/parsedown as base markdown parser.
+A generic content parser based on the devto post format, with front matter and liquid tag support. 
+Parsed uses [erusev/parsedown](https://packagist.org/packages/erusev/parsedown) as base markdown parser.
 
+Current liquid tags implemented:
 
-## Usage
+- Twitter embed: `{% twitter tweet_id %}`
+- Youtube video embed: `{% youtube video_id %}`
+- GitHub File: `{% github full_path_to_repo_file %}`
+
+More to come, contributions welcome.
+
+## Installation
 
 ```bash
 composer require erikaheidi/parsed
 ```
 
+## Usage Examples
+
 ```php
+<?php
 use Parsed\Content;
 use Parsed\ContentParser;
 

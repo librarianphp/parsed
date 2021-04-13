@@ -20,7 +20,7 @@ $content .= "---\n";
 $content .= "## Testing";
 
 $article = new Content($content);
-$article->parse(new ContentParser());
+$article->parse(new ContentParser(), true);
 
 print_r($article);
 ```

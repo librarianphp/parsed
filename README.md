@@ -4,6 +4,8 @@ Parsed uses [erusev/parsedown](https://packagist.org/packages/erusev/parsedown) 
 
 Current liquid tags implemented:
 
+- HTML Video embed (mp4): `{% video path_to_video.mp4 %}`
+- HTML Audio embed (mp3): `{% audio path_to_audio.mp3 %}`
 - Twitter embed: `{% twitter tweet_id %}`
 - Youtube video embed: `{% youtube video_id %}`
 - GitHub File: `{% github full_path_to_repo_file %}`

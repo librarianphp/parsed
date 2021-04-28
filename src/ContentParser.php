@@ -3,8 +3,10 @@
 
 namespace Parsed;
 
+use Parsed\CustomTagParser\AudioTagParser;
 use Parsed\CustomTagParser\GithubCustomTagParser;
 use Parsed\CustomTagParser\TwitterCustomTagParser;
+use Parsed\CustomTagParser\VideoTagParser;
 use Parsed\CustomTagParser\YoutubeCustomTagParser;
 
 /**
@@ -35,6 +37,8 @@ class ContentParser
     public function __construct(array $parser_params = [])
     {
         $this->parser_params = $parser_params;
+        $this->addCustomTagParser('video', new VideoTagParser());
+        $this->addCustomTagParser('audio', new AudioTagParser());
         $this->addCustomTagParser('twitter', new TwitterCustomTagParser());
         $this->addCustomTagParser('youtube', new YoutubeCustomTagParser());
         $this->addCustomTagParser('github', new GithubCustomTagParser());

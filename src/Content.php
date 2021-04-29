@@ -1,9 +1,6 @@
 <?php
 
-
 namespace Parsed;
-
-use DateTime;
 
 /**
  * Defines a Content Model
@@ -30,11 +27,6 @@ class Content
     public function __construct($content = null)
     {
         $this->raw = $content;
-    }
-
-    public function __get($key)
-    {
-        return $this->frontMatterGet($key);
     }
 
     /**
@@ -87,6 +79,7 @@ class Content
 
     /**
      * @param ContentParser $parser
+     * @param bool $parse_markdown
      */
     public function parse(ContentParser $parser, bool $parse_markdown = false)
     {

@@ -26,10 +26,9 @@ test('it loads content and parses front matter', function () {
     $parser = new ContentParser();
     $article = $parser->parse(new Content($this->raw_content));
 
-    expect($article->title)->toEqual("Content Title");
-    expect($article->custom)->toEqual("custom");
+    expect($article->frontMatterGet('title'))->toEqual("Content Title");
+    expect($article->frontMatterGet('custom'))->toEqual("custom");
     expect($article->frontMatterHas('custom'))->toBeTrue();
-    expect($article->frontMatterGet('custom'))->toEqual('custom');
 });
 
 test('it loads content and parses markdown', function () {

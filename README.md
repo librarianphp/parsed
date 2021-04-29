@@ -1,6 +1,6 @@
 # Parsed
 A generic content parser based on the devto post format, with front matter and liquid tag support. 
-Parsed uses [erusev/parsedown](https://packagist.org/packages/erusev/parsedown) as base markdown parser.
+Parsed uses [league/commonmark](https://packagist.org/packages/league/commonmark) as base markdown parser.
 
 Current liquid tags implemented:
 
@@ -57,4 +57,12 @@ custom: custom
     [body_markdown] => ## Testing
     [body_html] => <h2>Testing</h2>
 )
+```
+
+## Tests
+
+Parsed uses [Pest](https://github.com/pestphp/pest) as testing framework. To run the tests:
+
+```command
+./vendor/bin/pest
 ```

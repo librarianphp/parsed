@@ -23,7 +23,8 @@ test('it creates content from raw markdown', function () {
 test('it parses content with front matter', function () {
     $content = new Content($this->raw_content);
     $content->parse(new ContentParser(), true);
-    expect($content->title)->toEqual("Content Title");
+    expect($content->frontMatterHas('title'))->toBeTrue();
+    expect($content->frontMatterGet('title'))->toEqual("Content Title");
     expect($content->body_html)->toEqual("<h2>Testing</h2>\n");
 });
 
@@ -38,5 +39,5 @@ test('it creates a valid front matter', function () {
     $content->parse(new ContentParser());
 
     expect($article->getFrontMatter())->toEqual($content->getFrontMatter());
-    expect($content->custom)->toEqual($content->custom);
+    expect($article->frontMatterGet('custom'))->toEqual('custom');
 });

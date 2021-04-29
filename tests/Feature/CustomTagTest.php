@@ -35,7 +35,7 @@ test('it parses github liquid tag', function () {
     $parser = new ContentParser();
     $article = $parser->parse(new Content($this->github_content), true);
 
-    expect($article->body_html)->toContain('"name": "erikaheidi/parsed"');
+    expect(html_entity_decode($article->body_html))->toContain('"name": "erikaheidi/parsed"');
 });
 
 test('it parses video liquid tag', function () {

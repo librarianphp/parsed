@@ -3,11 +3,18 @@
 
 namespace Parsed;
 
+use League\CommonMark\CommonMarkConverter;
+use League\CommonMark\Environment;
+use League\CommonMark\Extension\Autolink\AutolinkExtension;
+use League\CommonMark\Extension\Strikethrough\StrikethroughExtension;
+use League\CommonMark\Extension\Table\TableExtension;
+use League\CommonMark\Extension\TaskList\TaskListExtension;
 use Parsed\CustomTagParser\AudioTagParser;
 use Parsed\CustomTagParser\GithubCustomTagParser;
 use Parsed\CustomTagParser\TwitterCustomTagParser;
 use Parsed\CustomTagParser\VideoTagParser;
 use Parsed\CustomTagParser\YoutubeCustomTagParser;
+use League\CommonMark\GithubFlavoredMarkdownConverter;
 
 /**
  * Class ContentParser
@@ -96,11 +103,16 @@ class ContentParser
      */
     public function getHtmlBody($markdown)
     {
-        $parsedown = new \ParsedownExtra();
+        $environment = Environment::createCommonMarkEnvironment();
+        $environment->addExtension(new StrikethroughExtension());
+        $environment->addExtension(new TableExtension());
+        $environment->addExtension(new TaskListExtension());
+        $environment->addExtension(new AutolinkExtension());
+        $converter = new CommonMarkConverter([], $environment);
 
         try {
-            $html = $this->parseSpecial($markdown);
-            return $parsedown->text($html);
+            $markdown = $this->parseSpecial($markdown);
+            return $converter->convertToHtml($markdown);
         } catch (\Exception $e) {
             return null;
         }
@@ -115,7 +127,6 @@ class ContentParser
     {
         return preg_replace_callback_array([
             '/^\{%\s(.*)\s(.*)\s%}/m' => function ($match) {
-
                 if (array_key_exists($match[1], $this->custom_tag_parsers)) {
                     $parser = $this->custom_tag_parsers[$match[1]];
                     if ($parser instanceof CustomTagParserInterface) {

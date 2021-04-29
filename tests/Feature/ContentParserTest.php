@@ -36,5 +36,13 @@ test('it loads content and parses markdown', function () {
     $parser = new ContentParser();
     $article = $parser->parse(new Content($this->raw_content), true);
 
-    expect($article->body_html)->toEqual("<h2>Testing</h2>");
+    expect($article->body_html)->toEqual("<h2>Testing</h2>\n");
+});
+
+test('it parses backticks as inline code blocks', function () {
+    $parser = new ContentParser();
+    $content = $this->raw_content . "\ntrying `parsed`\n";
+    $article = $parser->parse(new Content($content), true);
+
+    expect($article->body_html)->toContain("<code>parsed</code>");
 });

@@ -59,6 +59,67 @@ custom: custom
 )
 ```
 
+## Obtaining Front Matter
+
+There are two methods to work with the front matter: `frontMatterHas` and `frontMatterGet`:
+
+```php
+$article = new Content($content);
+$article->parse(new ContentParser(), true);
+
+if ($article->frontMatterHas('title')) {
+    return $article->frontMatterGet('title');
+}
+```
+
+## Creating Custom Liquid Tags
+
+Liquid tags are classes that implement the `CustomTagParserInterface`. They need to implement a method named `parse`, which receives the string provided to the liquid tag when called from the markdown file. 
+For instance, this is the full code for the `video` liquid tag parser class:
+
+```php
+<?php
+#src/CustomTagParser/VideoTagParser.php
+
+namespace Parsed\CustomTagParser;
+
+use Parsed\CustomTagParserInterface;
+
+class VideoTagParser implements CustomTagParserInterface
+{
+    public function parse($tag_value, array $params = [])
+    {
+        return "<video controls>" .
+         "<source src=\"$tag_value\" type=\"video/mp4\">" .
+         "Your browser does not support the video tag." .
+         "</video>";
+    }
+}
+```
+
+You'll have to include your custom tag parser class within the ContentParser:
+
+```php
+$parser = new \Parsed\ContentParser();
+$parser->addCustomTagParser('video', new VideoTagParser());
+```
+_Note: The built-in tag parsers are already registered within ContentParser. These are: `video`, `audio`, `twitter`, `youtube` and `github`._
+
+
+For instance, if you have in your markdown:
+
+```
+{% video /videos/test.mp4 %}
+```
+
+It will convert to the tag into the following code:
+
+```html
+<video controls>
+   <source src="/videos/test.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+```
 ## Tests
 
 Parsed uses [Pest](https://github.com/pestphp/pest) as testing framework. To run the tests:

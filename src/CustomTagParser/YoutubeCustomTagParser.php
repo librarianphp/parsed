@@ -27,8 +27,10 @@ class YoutubeCustomTagParser implements CustomTagParserInterface
      * @param string $video_url
      * @return string
      */
-    public function getEmbed($video_url)
+    public function getEmbed($tag_value)
     {
-        return sprintf('<iframe width="'. $this->width . '" height="' . $this->height. '" src="%s" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>', $video_url);
+        return '<div class="relative" style="padding-top: 56.25%">
+          <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/' . $tag_value .'" frameborder="0"></iframe>
+        </div>';
     }
 }

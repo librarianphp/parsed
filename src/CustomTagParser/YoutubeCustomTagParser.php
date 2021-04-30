@@ -20,7 +20,7 @@ class YoutubeCustomTagParser implements CustomTagParserInterface
         $this->width = $params['width'] ?? 560;
         $this->height = $params['height'] ?? 315;
 
-        return $this->getEmbed("https://www.youtube.com/embed/" . $tag_value);
+        return $this->getEmbed($tag_value);
     }
 
     /**

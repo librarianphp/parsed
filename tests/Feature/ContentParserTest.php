@@ -45,3 +45,12 @@ test('it parses backticks as inline code blocks', function () {
 
     expect($article->body_html)->toContain("<code>parsed</code>");
 });
+
+test('it parses markdown when from matter is not set', function () {
+    $parser = new ContentParser();
+    $content = "Trying `parsed`\n";
+
+    $article = $parser->parse(new Content($content), true);
+    expect($article->body_html)->not()->toBeNull();
+    expect($article->body_html)->toContain("<code>parsed</code>");
+});

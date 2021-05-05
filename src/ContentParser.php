@@ -66,14 +66,15 @@ class ContentParser
         if (count($parts) > 2) {
             $article->front_matter = $this->getFrontMatter($parts[1]);
             $article->body_markdown = $parts[2];
-            if ($parse_markdown) {
-                $article->body_html = $this->getHtmlBody($article->body_markdown);
-            }
         } else {
             $article->front_matter = [];
             $article->body_markdown = $article->raw;
         }
 
+        if ($parse_markdown) {
+            $article->body_html = $this->getHtmlBody($article->body_markdown);
+        }
+        
         return $article;
     }
 

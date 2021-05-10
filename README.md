@@ -15,7 +15,7 @@ More to come, contributions welcome.
 ## Installation
 
 ```bash
-composer require erikaheidi/parsed
+composer require librarianphp/parsed
 ```
 
 ## Usage Examples

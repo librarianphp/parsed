@@ -1,9 +1,9 @@
 {
-  "name": "erikaheidi/parsed",
+  "name": "librarianphp/parsed",
   "type": "library",
   "description": "A generic content parser that supports the devto markdown format",
   "license": "MIT",
-  "homepage": "https://github.com/erikaheidi/parsed",
+  "homepage": "https://github.com/librarianphp/parsed",
   "autoload": {
     "psr-4": {
       "Parsed\\": "src/"

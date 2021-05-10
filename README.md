@@ -8,7 +8,7 @@ Current liquid tags implemented:
 - HTML Audio embed (mp3): `{% audio path_to_audio.mp3 %}`
 - Twitter embed: `{% twitter tweet_id %}`
 - Youtube video embed: `{% youtube video_id %}`
-- GitHub File: `{% github full_path_to_repo_file %}`
+- GitHub File (Gists not supported atm): `{% github full_path_to_repo_file %}`
 
 More to come, contributions welcome.
 

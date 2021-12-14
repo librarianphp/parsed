@@ -3,18 +3,19 @@
 
 namespace Parsed;
 
-use League\CommonMark\CommonMarkConverter;
-use League\CommonMark\Environment;
+use League\CommonMark\Environment\Environment;
 use League\CommonMark\Extension\Autolink\AutolinkExtension;
+use League\CommonMark\Extension\CommonMark\CommonMarkCoreExtension;
 use League\CommonMark\Extension\Strikethrough\StrikethroughExtension;
 use League\CommonMark\Extension\Table\TableExtension;
 use League\CommonMark\Extension\TaskList\TaskListExtension;
+use League\CommonMark\Parser\MarkdownParser;
+use League\CommonMark\Renderer\HtmlRenderer;
 use Parsed\CustomTagParser\AudioTagParser;
 use Parsed\CustomTagParser\GithubCustomTagParser;
 use Parsed\CustomTagParser\TwitterCustomTagParser;
 use Parsed\CustomTagParser\VideoTagParser;
 use Parsed\CustomTagParser\YoutubeCustomTagParser;
-use League\CommonMark\GithubFlavoredMarkdownConverter;
 
 /**
  * Class ContentParser
@@ -104,16 +105,20 @@ class ContentParser
      */
     public function getHtmlBody($markdown)
     {
-        $environment = Environment::createCommonMarkEnvironment();
+        $environment = new Environment();
+        $environment->addExtension(new CommonMarkCoreExtension());
         $environment->addExtension(new StrikethroughExtension());
         $environment->addExtension(new TableExtension());
         $environment->addExtension(new TaskListExtension());
         $environment->addExtension(new AutolinkExtension());
-        $converter = new CommonMarkConverter([], $environment);
+
+        $parser = new MarkdownParser($environment);
+        $renderer = new HtmlRenderer($environment);
 
         try {
             $markdown = $this->parseSpecial($markdown);
-            return $converter->convertToHtml($markdown);
+            $document = $parser->parse($markdown);
+            return $renderer->renderDocument($document)->__toString();
         } catch (\Exception $e) {
             return null;
         }

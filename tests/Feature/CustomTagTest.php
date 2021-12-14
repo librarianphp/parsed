@@ -1,4 +1,5 @@
 <?php
+
 use Parsed\Content;
 use Parsed\ContentParser;
 

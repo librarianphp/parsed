@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Parsed\CustomTagParser;
 
 use Parsed\CustomTagParserInterface;

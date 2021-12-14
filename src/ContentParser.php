@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Parsed;
 
 use League\CommonMark\Environment\Environment;
@@ -75,7 +74,7 @@ class ContentParser
         if ($parse_markdown) {
             $article->body_html = $this->getHtmlBody($article->body_markdown);
         }
-        
+
         return $article;
     }
 

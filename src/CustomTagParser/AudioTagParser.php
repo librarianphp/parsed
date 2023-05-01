@@ -6,7 +6,7 @@ use Parsed\CustomTagParserInterface;
 
 class AudioTagParser implements CustomTagParserInterface
 {
-    public function parse($tag_value, array $params = [])
+    public function parse(string $tag_value, array $params = []): string
     {
         return "<audio controls>" .
             "<source src=\"$tag_value\" type=\"audio/mpeg\">" .

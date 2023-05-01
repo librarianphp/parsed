@@ -23,19 +23,19 @@ use Parsed\CustomTagParser\YoutubeCustomTagParser;
 class ContentParser
 {
     /** @var string  */
-    protected $original_content;
+    protected string $original_content;
 
     /** @var array */
-    protected $front_matter;
+    protected array $front_matter;
 
     /** @var string */
-    protected $markdown;
+    protected string $markdown;
 
     /** @var array */
-    protected $custom_tag_parsers;
+    protected array $custom_tag_parsers;
 
     /** @var array */
-    protected $parser_params;
+    protected array $parser_params;
 
     /**
      * ContentParser constructor.
@@ -51,7 +51,7 @@ class ContentParser
         $this->addCustomTagParser('github', new GithubCustomTagParser());
     }
 
-    public function addCustomTagParser($name, CustomTagParserInterface $tag_parser)
+    public function addCustomTagParser($name, CustomTagParserInterface $tag_parser): void
     {
         $this->custom_tag_parsers[$name] = $tag_parser;
     }
@@ -98,11 +98,7 @@ class ContentParser
         return $vars;
     }
 
-    /**
-     * @return string|string[]|null
-     * @throws \Exception
-     */
-    public function getHtmlBody($markdown)
+    public function getHtmlBody($markdown): string|null
     {
         $environment = new Environment();
         $environment->addExtension(new CommonMarkCoreExtension());
@@ -128,7 +124,7 @@ class ContentParser
      * @param string $text
      * @return string
      */
-    public function parseSpecial($text)
+    public function parseSpecial(string $text): string
     {
         return preg_replace_callback_array([
             '/^\{%\s(.*)\s(.*)\s%}/m' => function ($match) {

@@ -8,12 +8,12 @@ use Minicli\Curly\Client;
 class GithubCustomTagParser implements CustomTagParserInterface
 {
     /**
-     * Returns referred github content as a markdown code block.
-     * @param $tag_value
+     * Returns referred GitHub content as a Markdown code block.
+     * @param string $tag_value
      * @param array $params
      * @return string
      */
-    public function parse($tag_value, array $params = [])
+    public function parse(string $tag_value, array $params = []): string
     {
         if ($this->validateUrl($tag_value)) {
             $client = new Client();
@@ -30,10 +30,10 @@ class GithubCustomTagParser implements CustomTagParserInterface
 
     /**
      * Validates a Github URL
-     * @param $github_url
+     * @param string $github_url
      * @return bool
      */
-    public function validateUrl($github_url)
+    public function validateUrl(string $github_url): bool
     {
         preg_match('@^(?:https://)?([^/]+)@i', $github_url, $matches);
         return ($matches[1] == 'github.com');
@@ -43,10 +43,10 @@ class GithubCustomTagParser implements CustomTagParserInterface
      * Transforms URL to obtain raw version of content
      *   ex. web: https://github.com/minicli/librarian/blob/master/config_sample.php
      *   ex. raw: https://raw.githubusercontent.com/minicli/librarian/master/config_sample.php
-     * @param $github_url
+     * @param string $github_url
      * @return string
      */
-    public function getRawUrl($github_url)
+    public function getRawUrl(string $github_url): string
     {
         $raw_url = str_replace('github.com', 'raw.githubusercontent.com', $github_url);
         return str_replace('/blob', '', $raw_url);

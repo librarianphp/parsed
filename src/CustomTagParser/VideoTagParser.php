@@ -6,7 +6,7 @@ use Parsed\CustomTagParserInterface;
 
 class VideoTagParser implements CustomTagParserInterface
 {
-    public function parse($tag_value, array $params = [])
+    public function parse(string $tag_value, array $params = []): string
     {
         return "<video controls>" .
          "<source src=\"$tag_value\" type=\"video/mp4\">" .

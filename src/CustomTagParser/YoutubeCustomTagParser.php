@@ -6,15 +6,15 @@ use Parsed\CustomTagParserInterface;
 
 class YoutubeCustomTagParser implements CustomTagParserInterface
 {
-    protected $width;
-    protected $height;
+    protected int $width;
+    protected int $height;
 
     /**
      * @param string $tag_value
      * @param array $params
      * @return string
      */
-    public function parse($tag_value, array $params = [])
+    public function parse(string $tag_value, array $params = []): string
     {
         $this->width = $params['width'] ?? 560;
         $this->height = $params['height'] ?? 315;
@@ -23,10 +23,10 @@ class YoutubeCustomTagParser implements CustomTagParserInterface
     }
 
     /**
-     * @param string $video_url
+     * @param string $tag_value
      * @return string
      */
-    public function getEmbed($tag_value)
+    public function getEmbed(string $tag_value): string
     {
         return '<div class="relative" style="padding-top: 56.25%">
           <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/' . $tag_value .'" frameborder="0"></iframe>

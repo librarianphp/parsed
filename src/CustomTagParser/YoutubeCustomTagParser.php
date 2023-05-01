@@ -36,6 +36,10 @@ class YoutubeCustomTagParser implements CustomTagParserInterface
     {
         $stencil = new Stencil($this->tplDir);
 
-        return $stencil->applyTemplate('youtube', [ 'tag_value' => $tag_value ]);
+        return $stencil->applyTemplate('youtube', [
+            'tag_value' => $tag_value,
+            'width' => $this->width,
+            'height' => $this->height
+        ]);
     }
 }

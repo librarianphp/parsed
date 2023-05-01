@@ -2,34 +2,44 @@
 
 namespace Parsed\CustomTagParser;
 
+use Minicli\FileNotFoundException;
+use Minicli\Stencil;
 use Parsed\CustomTagParserInterface;
 
 class YoutubeCustomTagParser implements CustomTagParserInterface
 {
-    protected $width;
-    protected $height;
+    protected int $width;
+    protected int $height;
+    protected string $tplDir;
 
     /**
      * @param string $tag_value
      * @param array $params
      * @return string
+     * @throws FileNotFoundException
      */
-    public function parse($tag_value, array $params = [])
+    public function parse(string $tag_value, array $params = []): string
     {
         $this->width = $params['width'] ?? 560;
         $this->height = $params['height'] ?? 315;
+        $this->tplDir = $params['stencilDir'] ?? __DIR__ . '/../../tpl';
 
         return $this->getEmbed($tag_value);
     }
 
     /**
-     * @param string $video_url
+     * @param string $tag_value
      * @return string
+     * @throws FileNotFoundException
      */
-    public function getEmbed($tag_value)
+    public function getEmbed(string $tag_value): string
     {
-        return '<div class="relative" style="padding-top: 56.25%">
-          <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube.com/embed/' . $tag_value .'" frameborder="0"></iframe>
-        </div>';
+        $stencil = new Stencil($this->tplDir);
+
+        return $stencil->applyTemplate('youtube', [
+            'tag_value' => $tag_value,
+            'width' => $this->width,
+            'height' => $this->height
+        ]);
     }
 }

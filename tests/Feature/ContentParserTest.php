@@ -18,17 +18,17 @@ test('it parses and returns a Content object', function () {
     $parser = new ContentParser();
     $article = $parser->parse(new Content($this->raw_content));
 
-    expect($article)->toBeObject();
-    expect($article->raw)->toBeString();
+    expect($article)->toBeObject()
+        ->and($article->raw)->toBeString();
 });
 
 test('it loads content and parses front matter', function () {
     $parser = new ContentParser();
     $article = $parser->parse(new Content($this->raw_content));
 
-    expect($article->frontMatterGet('title'))->toEqual("Content Title");
-    expect($article->frontMatterGet('custom'))->toEqual("custom");
-    expect($article->frontMatterHas('custom'))->toBeTrue();
+    expect($article->frontMatterGet('title'))->toEqual("Content Title")
+        ->and($article->frontMatterGet('custom'))->toEqual("custom")
+        ->and($article->frontMatterHas('custom'))->toBeTrue();
 });
 
 test('it loads content and parses markdown', function () {
@@ -51,6 +51,6 @@ test('it parses markdown when from matter is not set', function () {
     $content = "Trying `parsed`\n";
 
     $article = $parser->parse(new Content($content), true);
-    expect($article->body_html)->not()->toBeNull();
-    expect($article->body_html)->toContain("<code>parsed</code>");
+    expect($article->body_html)->not()->toBeNull()
+        ->and($article->body_html)->toContain("<code>parsed</code>");
 });

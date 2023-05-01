@@ -8,17 +8,17 @@ namespace Parsed;
  */
 class Content
 {
-    /** @var string Raw content */
-    public $raw;
+    /** @var ?string Raw content */
+    public ?string $raw = "";
 
     /** @var array Front-matter key-pairs */
-    public $front_matter = [];
+    public array $front_matter = [];
 
     /** @var string Body of content in markdown */
-    public $body_markdown;
+    public string $body_markdown = "";
 
     /** @var string Body of content in html */
-    public $body_html;
+    public string $body_html = "";
 
     /**
      * Content constructor.
@@ -56,10 +56,10 @@ class Content
 
     /**
      * @param string $key
-     * @param string $default_value
-     * @return string|null
+     * @param ?string $default_value
+     * @return ?string
      */
-    public function frontMatterGet(string $key, $default_value = null)
+    public function frontMatterGet(string $key, ?string $default_value = null): ?string
     {
         if ($this->frontMatterHas($key)) {
             return $this->front_matter[$key] ?: $default_value;
@@ -72,7 +72,7 @@ class Content
      * @param string $key
      * @param string $value
      */
-    public function frontMatterSet(string $key, string $value)
+    public function frontMatterSet(string $key, string $value): void
     {
         $this->front_matter[$key] = $value;
     }
@@ -81,7 +81,7 @@ class Content
      * @param ContentParser $parser
      * @param bool $parse_markdown
      */
-    public function parse(ContentParser $parser, bool $parse_markdown = false)
+    public function parse(ContentParser $parser, bool $parse_markdown = false): void
     {
         $parser->parse($this, $parse_markdown);
     }
@@ -100,7 +100,7 @@ class Content
         return $content;
     }
 
-    public function updateRaw()
+    public function updateRaw(): void
     {
         $raw = $this->getFrontMatter();
         $raw .= $this->body_markdown;

@@ -2,15 +2,20 @@
 
 namespace Parsed\CustomTagParser;
 
+use Minicli\FileNotFoundException;
+use Minicli\Stencil;
 use Parsed\CustomTagParserInterface;
 
 class VideoTagParser implements CustomTagParserInterface
 {
-    public function parse($tag_value, array $params = [])
+    /**
+     * @throws FileNotFoundException
+     */
+    public function parse(string $tag_value, array $params = []): string
     {
-        return "<video controls>" .
-         "<source src=\"$tag_value\" type=\"video/mp4\">" .
-         "Your browser does not support the video tag." .
-         "</video>";
+        $tplDir = $params['stencilDir'] ?? __DIR__ . '/../../tpl';
+
+        $stencil = new Stencil($tplDir);
+        return $stencil->applyTemplate('video', ['tag_value' => $tag_value]);
     }
 }

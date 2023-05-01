@@ -2,15 +2,20 @@
 
 namespace Parsed\CustomTagParser;
 
+use Minicli\FileNotFoundException;
+use Minicli\Stencil;
 use Parsed\CustomTagParserInterface;
 
 class AudioTagParser implements CustomTagParserInterface
 {
+    /**
+     * @throws FileNotFoundException
+     */
     public function parse(string $tag_value, array $params = []): string
     {
-        return "<audio controls>" .
-            "<source src=\"$tag_value\" type=\"audio/mpeg\">" .
-            "Your browser does not support the audio element." .
-            "</audio>";
+        $tplDir = $params['stencilDir'] ?? __DIR__ . '/../../tpl';
+
+        $stencil = new Stencil($tplDir);
+        return $stencil->applyTemplate('audio', ['tag_value' => $tag_value]);
     }
 }

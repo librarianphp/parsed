@@ -13,7 +13,8 @@
     "ext-curl": "*",
     "ext-json": "*",
     "minicli/curly": "^0.2.0",
-    "league/commonmark": "^2.0"
+    "league/commonmark": "^2.0",
+    "minicli/stencil": "^0.1.1"
   },
   "require-dev": {
     "pestphp/pest": "^2.5",

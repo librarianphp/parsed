@@ -26,12 +26,12 @@ class TwitterCustomTagParser implements CustomTagParserInterface
     {
         $client = new Client();
 
-        $response = $client->get('https://publish.twitter.com/oembed?url=https://twitter.com/erikaheidi/status/' . $tweet_id);
+        $response = $client->get('https://publish.twitter.com/oembed?url=https://twitter.com/twitterdev/status/' . $tweet_id);
         if ($response['code'] == 200) {
             $body = json_decode($response['body'], true);
             return $body['html'];
         }
 
-        return " [ <a href='https://twitter.com/erikaheidi/status/$tweet_id'>Original Tweet</a> ]";
+        return " [ <a href='https://twitter.com/twitterdev/status/$tweet_id'>Original Tweet</a> ]";
     }
 }
